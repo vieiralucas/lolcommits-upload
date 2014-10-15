@@ -1,0 +1,36 @@
+{
+  "name": "lolcommits-upload",
+  "version": "0.1.0",
+  "description": "Upload your lolcommits to image hosts",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vieiralucas/lolcommits-upload"
+  },
+  "keywords": [
+    "cli",
+    "lolcommits",
+    "lol",
+    "commits",
+    "image",
+    "hosts"
+  ],
+  "author": "Lucas Vieira <vieiralucas4@gmail.com> (http://vieiralucas.github.io/)",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/vieiralucas/lolcommits-upload/issues"
+  },
+  "homepage": "https://github.com/vieiralucas/lolcommits-upload",
+  "preferGlobal": "true",
+  "bin": {
+    "lolcommits-upload": "./cli.js"
+  },
+  "dependencies": {
+    "commander": "^2.3.0",
+    "file": "^0.2.2",
+    "imgur": "^0.1.3"
+  }
+}
