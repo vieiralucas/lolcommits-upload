@@ -24,7 +24,6 @@ if(commander.imgur) {
                 total += json[repo].length;
             }
         }
-        console.log(total);
         for (repo in json) {
             if (json.hasOwnProperty(repo)) {
                 var arr = json[repo];
@@ -35,15 +34,12 @@ if(commander.imgur) {
                         if(err) {
                             console.error(err);
                         }
-                        //console.log(res);
                         output[rep][path.basename(file, '.jpg')] = res.data.link;
-                        //console.log(output);
                         count++;
                         if(count === total) {
                             console.log(output);
                         }
                     })
-                    console.log(i);
                 }
             }
         }
