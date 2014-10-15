@@ -3,61 +3,54 @@
 'use strict'
 
 var path      = require('path'),
+    fs        = require('fs'),
     commander = require('commander'),
-    ftj       = require('./lib/filesToJson.js');
+    prompt    = require('prompt'),
+    colors    = require('colors'),
+    uploader  = require('./lib/uploader.js');
       
 commander
-    .version('0.1.0')
-    .option('-i, --imgur', 'Upload lolcommits to imgur')
+    .version('1.0.0')
+    .option('-i, --imgur', 'upload lolcommits to imgur')
+    .option('-a, --all', 'upload lolcommits to every supported host')
     .parse(process.argv)
 
-if(commander.imgur) {
-    var imgur = require('imgur');
-    
-    // The following client ID is tied to the
-    // registered 'lolcommit-imgur' app and is available
-    // here for public, anonymous usage via this node
-    // module only.
-    imgur.setClientId('670f712ae4a352e');  
-    ftj.getJSON(function(err, json) {
-        if(err) {
-            return console.error(err);
-        }
-        var repo, output = {};
-        var total = 0;
-        for (repo in json) {
-            if(json.hasOwnProperty(repo)) {
-                total += json[repo].length;
+var outputFilePath = commander.args[0];
+if(typeof(outputFilePath) == 'undefined') {
+    prompt.message = '';
+    prompt.delimiter = '';
+    var schema = {
+        properties: {
+            output: {
+                description: "Path to the output file: ",
+                default: "lolcommits-upload.json",
             }
         }
-        for (repo in json) {
-            if (json.hasOwnProperty(repo)) {
-                var arr = json[repo];
-                output[repo] = {};
-                var count = 0;
-                for (var i = 0; i < arr.length; i++) {
-                    imgurUpload(repo, arr[i], function(err, res, rep, file) {
-                        if(err) {
-                            console.error(err);
-                        }
-                        output[rep][path.basename(file, '.jpg')] = res.data.link;
-                        count++;
-                        if(count === total) {
-                            console.log(output);
-                        }
-                    })
-                }
-            }
-        }
+    }
+    prompt.start();
+    prompt.get(schema, function (err, result) {
+        outputFilePath = result.output;
+        upload();
     });
+} else {
+    upload();
 }
 
-function imgurUpload(repo, file, callback) {
-    imgur.uploadFile(file)
-        .then(function (res) {
-            callback(null, res, repo, file);
-        })
-        .catch(function (err) {
-            callback(err.message);
+function upload() {
+    var all = commander.all;
+    if(commander.imgur || all) {
+        console.log('Uploading to imgur...'.yellow);
+        uploader.upload('imgur', function(err, json) {
+            if(err) {
+                return console.error(err);
+            }
+            fs.writeFile(outputFilePath, JSON.stringify(json, null, 4), function(err) {
+                console.log('The lolcommits were successfully uploaded to imgur, check the links at '.green + outputFilePath.green + '.'.green);
+            });
+
         });
+    } else {
+        console.log('Please specify a host using one of the following options: '.red);
+        commander.help();
+    }
 }

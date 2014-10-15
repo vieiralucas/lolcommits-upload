@@ -1,7 +1,7 @@
 {
   "name": "lolcommits-upload",
-  "version": "0.1.0",
-  "description": "Upload your lolcommits to image hosts",
+  "version": "1.0.0",
+  "description": "A cli tool to upload your lolcommits to image hosts",
   "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,8 +29,10 @@
     "lolcommits-upload": "./cli.js"
   },
   "dependencies": {
+    "colors": "^1.0.3",
     "commander": "^2.3.0",
     "file": "^0.2.2",
-    "imgur": "^0.1.3"
+    "imgur": "^0.1.3",
+    "prompt": "^0.2.14"
   }
 }
