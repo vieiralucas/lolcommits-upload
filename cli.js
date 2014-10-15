@@ -13,6 +13,12 @@ commander
 
 if(commander.imgur) {
     var imgur = require('imgur');
+    
+    // The following client ID is tied to the
+    // registered 'lolcommit-imgur' app and is available
+    // here for public, anonymous usage via this node
+    // module only.
+    imgur.setClientId('670f712ae4a352e');  
     ftj.getJSON(function(err, json) {
         if(err) {
             return console.error(err);
