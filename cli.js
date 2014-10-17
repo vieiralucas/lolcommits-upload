@@ -10,7 +10,7 @@ var path      = require('path'),
     uploader  = require('./lib/uploader.js');
       
 commander
-    .version('1.0.1')
+    .version('1.1.0')
     .usage('[options] <outputfile>')
     .option('-i, --imgur', 'upload lolcommits to imgur')
     .option('-a, --all', 'upload lolcommits to every supported host');
