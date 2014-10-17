@@ -1,4 +1,4 @@
 lolcommits-upload
 =================
 
-Upload your lolcommits to image hosts
+A cli tool to upload your lolcommits to image hosts

@@ -10,10 +10,24 @@ var path      = require('path'),
     uploader  = require('./lib/uploader.js');
       
 commander
-    .version('1.0.0')
+    .version('1.0.1')
+    .usage('[options] <outputfile>')
     .option('-i, --imgur', 'upload lolcommits to imgur')
-    .option('-a, --all', 'upload lolcommits to every supported host')
-    .parse(process.argv)
+    .option('-a, --all', 'upload lolcommits to every supported host');
+
+commander.on('--help', function(){
+  console.log('  Examples:');
+  console.log('');
+  console.log('    $ lolcommits-upload --imgur output.json');
+  console.log('    $ lolcommits-upload -a output.json');
+  console.log('');
+});
+
+commander.parse(process.argv)
+
+if(!commander.imgur && ! commander.all) {
+    commander.help();
+}
 
 var outputFilePath = commander.args[0];
 if(typeof(outputFilePath) == 'undefined') {

@@ -1,6 +1,6 @@
 {
   "name": "lolcommits-upload",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A cli tool to upload your lolcommits to image hosts",
   "main": "cli.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "lol",
     "commits",
     "image",
-    "hosts"
+    "hosts",
+    "upload"
   ],
   "author": "Lucas Vieira <vieiralucas4@gmail.com> (http://vieiralucas.github.io/)",
   "license": "GPLv3",
